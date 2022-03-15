@@ -41,8 +41,25 @@ export class ClientesController {
     }
 
     @Put(':id')
-    alterar(@Param('id') id, @Body() cliente: Clientes): Clientes {
-        return cliente
+    alterar(@Param('id') ids, @Body() cliente: Clientes): Clientes {
+        const clienteNaoExiste = `Esse cliente não existe! Id:${ids}`
+        const clientInfos = this.clientes.find( ({ id }) => id == ids);
+
+        if(clientInfos == null){
+            throw new NotFoundException(clienteNaoExiste)
+        }
+        else{
+
+            clientInfos.nome = cliente.nome
+            clientInfos.peso = cliente.peso
+            clientInfos.altura = cliente.altura
+            clientInfos.gordura = cliente.gordura
+            clientInfos.imc = cliente.imc   
+            return clientInfos
+        }
+
+        
+        
     }
 
     @Delete(':id')
