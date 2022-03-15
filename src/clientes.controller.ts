@@ -2,6 +2,21 @@ import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Put } fr
 import { NotFoundError } from "rxjs";
 import { Clientes } from "./cliente.model";
 
+var peso = true
+var altura = true
+
+function validaCliente(cliente) {
+    if(cliente.peso <= 0 && cliente.peso > 500){
+        return peso = false
+    }
+    else if(cliente.altura <= 0 && cliente.altura > 3){
+        return altura = false
+    }
+    
+}
+
+
+
 @Controller('clientes')
 export class ClientesController {
     clientes: Clientes[] = [
